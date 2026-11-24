@@ -13,12 +13,28 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // AUTORIZACIÓN: qué rutas son públicas
+//                // AUTORIZACIÓN: qué rutas son públicas
+//                .authorizeHttpRequests(auth -> auth
+//                        // Públicas: portada, página de error y recursos estáticos
+//                        .requestMatchers("/", "/error", "/css/**", "/vendor/**").permitAll()
+//                        // Consola H2: solo para desarrollo
+//                        .requestMatchers("/h2-console/**").permitAll()
+//                        // Cualquier otra cosa: estar identificado
+//                        .anyRequest().authenticated()
+//                )
+                //AUTORIZACIÓN ADMIN Y USER
                 .authorizeHttpRequests(auth -> auth
                         // Públicas: portada, página de error y recursos estáticos
                         .requestMatchers("/", "/error", "/css/**", "/vendor/**").permitAll()
                         // Consola H2: solo para desarrollo
                         .requestMatchers("/h2-console/**").permitAll()
+                        // solo ADMIN: altas, ediciones y borrado
+                        .requestMatchers("/libros/nuevo", "/libros/editar/**",
+                                "/libros/guardar", "/libros/borrar/**").hasRole("ADMIN")
+                        .requestMatchers("/autores/nuevo", "/autores/editar/**",
+                                "/autores/guardar", "/autores/borrar/**").hasRole("ADMIN")
+                        // ADMIN y USER: consultar y filtrar
+                        .requestMatchers("/libros", "/autores").hasAnyRole("ADMIN", "USER")
                         // Cualquier otra cosa: estar identificado
                         .anyRequest().authenticated()
                 )

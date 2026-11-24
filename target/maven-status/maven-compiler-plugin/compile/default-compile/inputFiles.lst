@@ -15,10 +15,14 @@
 /home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/mapper/LibroMapper.java
 /home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/model/Autor.java
 /home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/model/Libro.java
+/home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/model/Usuario.java
 /home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/repository/AutorRepository.java
 /home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/repository/AutorRepositoryJdbc.java
 /home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/repository/GenericRepository.java
 /home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/repository/LibroRepository.java
 /home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/repository/LibroRepositoryJdbc.java
+/home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/repository/UsuarioRepository.java
+/home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/repository/UsuarioRepositoryMemoria.java
 /home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/service/AutorService.java
 /home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/service/LibroService.java
+/home/alumnot/IdeaProjects/SpringSecurity/EXAMEN-1ev-ALUMNO/src/main/java/es/daw/bibliotecajdbc/service/UsuarioDetailsService.java

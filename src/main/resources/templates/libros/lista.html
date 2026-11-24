@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/layout :: head('Libros')}"></head>
 <body>
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
@@ -8,7 +9,10 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="titulo-seccion">📚 Libros</h2>
-        <a th:href="@{/libros/nuevo}" class="btn btn-success">
+        <h3>Bienvenido <span sec:authentication="name">!!!</span></h3>
+        <!--añade sec:authorize="hasRole('ADMIN')" 5.1
+        ana ya no puede añadir libros-->
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/libros/nuevo}" class="btn btn-success">
             <i class="bi bi-plus-lg"></i> Añadir libro
         </a>
     </div>
