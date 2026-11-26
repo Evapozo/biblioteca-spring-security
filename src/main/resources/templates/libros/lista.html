@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> <!--5.1-->
 <head th:replace="~{fragments/layout :: head('Libros')}"></head>
 <body>
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
@@ -72,8 +72,9 @@
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Publicación</th>
-                    <th  class="col-accion">Editar</th>
-                    <th class="col-accion">Borrar</th>
+                    <!--cabeceras ocultas depende el rol-->
+                    <th sec:authorize="hasAnyRole('ADMIN', 'BIBLIOTECARIO')" class="col-accion">Editar</th>
+                    <th sec:authorize="hasRole('ADMIN')" class="col-accion">Borrar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -82,14 +83,16 @@
                     <td th:text="${l.titulo}">Título</td>
                     <td th:text="${l.autorNombre}">Autor</td>
                     <td th:text="${#temporals.format(l.fechaPublicacion, 'dd/MM/yyyy')}">01/01/2000</td>
-                    <td>
-                        <a sec:authorize="hasRole('ADMIN')" th:href="@{/libros/editar/{isbn}(isbn=${l.isbn})}"
+                    <td sec:authorize="hasAnyRole('ADMIN', 'BIBLIOTECARIO')">
+                        <!-- Solo ADMIN y BIBLIOTECARIO pueden editar libros -->
+                        <a  th:href="@{/libros/editar/{isbn}(isbn=${l.isbn})}"
                            class="btn btn-warning btn-sm" title="Editar">
                             <i class="bi bi-pencil"></i>
                         </a>
                     </td>
-                    <td>
-                        <form th:action="@{/libros/borrar/{isbn}(isbn=${l.isbn})}" method="post"
+                    <td sec:authorize="hasRole('ADMIN')">
+                        <!-- Solo ADMIN puede borrar libros -->
+                        <form  th:action="@{/libros/borrar/{isbn}(isbn=${l.isbn})}" method="post"
                               onsubmit="return confirm('¿Seguro que quieres borrar este libro?');">
                             <button type="submit" class="btn btn-danger btn-sm" title="Borrar">
                                 <i class="bi bi-trash"></i>

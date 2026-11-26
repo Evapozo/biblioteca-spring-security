@@ -29,12 +29,15 @@ public class SecurityConfig {
                         // Consola H2: solo para desarrollo
                         .requestMatchers("/h2-console/**").permitAll()
                         // solo ADMIN: altas, ediciones y borrado
-                        .requestMatchers("/libros/nuevo", "/libros/editar/**",
-                                "/libros/guardar", "/libros/borrar/**").hasRole("ADMIN")
+                        .requestMatchers("/libros/nuevo", "/libros/editar/**", //anadir reto rol bibliotecario
+                                "/libros/guardar").hasAnyRole("ADMIN", "BIBLIOTECARIO")
+                        .requestMatchers("/libros/borrar/**").hasRole("ADMIN")
                         .requestMatchers("/autores/nuevo", "/autores/editar/**",
-                                "/autores/guardar", "/autores/borrar/**").hasRole("ADMIN")
-                        // ADMIN y USER: consultar y filtrar
-                        .requestMatchers("/libros", "/autores").hasAnyRole("ADMIN", "USER")
+                                "/autores/guardar").hasAnyRole("ADMIN", "BIBLIOTECARIO")
+                        .requestMatchers("/autores/borrar/**").hasRole("ADMIN")
+                        // ADMIN y USER: consultar y filtrar (si esto no está cualquier peticion
+                        //tiene acceso anyRequest().authenticated())
+                        .requestMatchers("/libros", "/autores").hasAnyRole("ADMIN", "USER", "BIBLIOTECARIO")
                         // Cualquier otra cosa: estar identificado
                         .anyRequest().authenticated()
                 )

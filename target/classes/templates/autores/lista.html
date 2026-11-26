@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="~{fragments/layout :: head('Autores')}"></head>
 <body>
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
@@ -19,8 +19,9 @@
     <thead class="table-dark">
     <tr>
       <th>Nombre</th>
-      <th class="col-accion">Editar</th>
-      <th class="col-accion">Borrar</th>
+      <!--cabeceras ocultas depende el rol-->
+      <th sec:authorize="hasAnyRole('ADMIN', 'BIBLIOTECARIO')" class="col-accion">Editar</th>
+      <th sec:authorize="hasRole('ADMIN')" class="col-accion">Borrar</th>
     </tr>
     </thead>
     <tbody>
@@ -29,13 +30,14 @@
     </tr>
     <tr th:each="a : ${autores}">
       <td th:text="${a.nombre}">Nombre</td>
-      <td>
-        <a th:href="@{/autores/editar/{id}(id=${a.id})}"
+      <td sec:authorize="hasAnyRole('ADMIN', 'BIBLIOTECARIO')">
+        <!-- Solo ADMIN y BIBLIOTECARIO pueden editar autores -->
+        <a  th:href="@{/autores/editar/{id}(id=${a.id})}"
            class="btn btn-warning btn-sm" title="Editar">
           <i class="bi bi-pencil"></i>
         </a>
       </td>
-      <td>
+      <td sec:authorize="hasRole('ADMIN')">
         <form th:action="@{/autores/borrar/{id}(id=${a.id})}" method="post"
               onsubmit="return confirm('Se borrarán también todos sus libros. ¿Continuar?');">
           <button type="submit" class="btn btn-danger btn-sm" title="Borrar">
